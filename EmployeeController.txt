@@ -1,0 +1,46 @@
+using EmployeeProject.Models;
+using System;
+using System.Collections;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace EmployeeProject.Controllers
+{
+    public class EmployeeController : Controller
+    {
+        
+       static ArrayList empList = new ArrayList();
+        // GET: Employee/Add
+      
+        public string Add(string eName,string eCnic,double eAge,double eHeight)
+        {
+             Employee employee = new Employee(eName,eCnic,eAge,eHeight);
+           empList.Add(employee);
+            if (empList != null)
+            {
+                return "record added successfully";
+            }
+            else
+            {
+                return "record not added successfully";
+            }
+        }
+
+        public string GetCnic(string cnic)
+        {
+            foreach (Employee employee in empList) {
+                if (employee._empCnic.Equals(cnic))
+                {
+                    return "Name : " + employee._empName + " Age : " + employee._empAge + " Height : " + employee._empHeight;
+                }
+                else
+                {
+                    return "no such record found";
+                }
+            }
+            return "";
+        }
+
+    }
+}
